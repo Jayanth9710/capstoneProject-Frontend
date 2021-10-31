@@ -1,6 +1,6 @@
 let getSettings = () => {
     return {
-         api : "https://airbnb-clone-by-jay.herokuapp.com/"
+         api : "https://airbnb-clone-by-jay.herokuapp.com"
         
     }
 }
