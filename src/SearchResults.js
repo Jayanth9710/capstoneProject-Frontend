@@ -32,7 +32,11 @@ function SearchResults() {
   const data = useContext(dataContext);
   const getRoomInfo = async () => {
     try {
-     let RoomsData = await axios.get(`${env.api}/list-all-rooms`);
+     let RoomsData = await axios.get(`${env.api}/list-all-rooms`,{
+      headers : {
+        "Authorization" : window.localStorage.getItem("app_token")
+      }
+    });
     setRooms([...RoomsData.data])
     console.log([...rooms])
     } catch (error) {
@@ -43,7 +47,11 @@ function SearchResults() {
   const handleId = async (id) => {
     try {
       // history.push("/roomsbooked");
-      let roombook = await axios.get(`${env.api}/booked-rooms/${id}`)
+      let roombook = await axios.get(`${env.api}/booked-rooms/${id}`,{
+        headers : {
+          "Authorization" : window.localStorage.getItem("app_token")
+        }
+      })
       console.log(id)
     } catch (error) {
       console.log(error)

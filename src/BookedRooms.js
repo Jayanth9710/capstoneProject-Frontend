@@ -27,7 +27,11 @@ function BookedRooms() {
 
 const getBookedRoom = async () => {
     try {
-        let roomBook = await axios.get(`${env.api}/roomsbooked`)
+        let roomBook = await axios.get(`${env.api}/roomsbooked`,{
+          headers : {
+            "Authorization" : window.localStorage.getItem("app_token")
+          }
+        })
         console.log(roomBook.data)
         setRooms([...roomBook.data])
     } catch (error) {
