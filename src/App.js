@@ -28,10 +28,6 @@ function App() {
         <Route path='/search' component={SearchPage} exact={true}/>
         <Route path="/register" component={Register} exact={true}/>
           <Route path='/login' component={Login} exact={true}/>
-          
-          
-          
-          
         </Switch>
         </DataProvider>
         <Footer />

@@ -5,9 +5,9 @@ import { useHistory } from 'react-router-dom';
 import env from "./settings";
 
 function Register() {
-    const [username, setusername] = useState("");
-    const [password, setpassword] = useState("");
-    const [confirmpassword, setconfirmpassword] = useState("");
+    const [username, setusername] = useState([]);
+    const [password, setpassword] = useState([]);
+    const [confirmpassword, setconfirmpassword] = useState([]);
     const history = useHistory()
     let handleSubmit = async (e) => {
         e.preventDefault()

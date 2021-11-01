@@ -46,7 +46,7 @@ function SearchResults() {
 
   const handleId = async (id) => {
     try {
-      // history.push("/roomsbooked");
+      history.push("/roomsbooked");
       let roombook = await axios.get(`${env.api}/booked-rooms/${id}`,{
         headers : {
           "Authorization" : window.localStorage.getItem("app_token")
@@ -107,12 +107,13 @@ function SearchResults() {
               </div>
               <div className="searchResults_price">
                 <h3>{e.price}/night</h3>
+                { e.isbooked ? <h4>This room already booked</h4> :
                 <h4>
                   Total Price : {( totalPrice = data.days * e.price)} for{" "}
                   {data.days} days
-                </h4>
+                </h4>}
                 <Link to="/roomsbooked">
-                <Button variant='outlined' onClick={() => handleId(e._id)} >Book</Button>
+                <Button variant='outlined' disabled={e.isbooked} onClick={() => handleId(e._id)} >Book</Button>
                 </Link>
               </div>
             </div>

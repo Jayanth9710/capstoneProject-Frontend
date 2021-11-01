@@ -19,6 +19,7 @@ function Header() {
 
   const handleLogout = async (e) =>{
     myStorage.removeItem("user");
+    window.localStorage.removeItem("app_token");
     data.setcurrentUser();
     history.push("/")
   }
@@ -52,8 +53,12 @@ function Header() {
                 <p>Become a host</p>
                 </Link>
                 
-                {data.currentUser ? (
+                {data.currentUser ? (<div>
           <button className="button logout" onClick={handleLogout}>Log out</button>
+          <Link to="/roomsbooked">
+            <button className="button login" >Your Bookings</button>
+            </Link>
+          </div>
           ) : (
           <div className="buttons">
             <Link to="/login">

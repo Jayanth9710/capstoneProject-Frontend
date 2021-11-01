@@ -17,7 +17,7 @@ const history = useHistory();
 const handlecreateroom = async () => {
     try {
         
-        const postData = await axios.post(`${env.api}/create-room`,{hotelname:hotelname,location:location,desc:desc,rating:rating,price:price,link:link},{
+        const postData = await axios.post(`${env.api}/create-room`,{hotelname:hotelname,location:location,desc:desc,rating:rating,price:price,link:link,isbooked:false},{
             headers : {
               "Authorization" : window.localStorage.getItem("app_token")
             }
