@@ -27,9 +27,14 @@ const ReadMore = ({ children }) => {
 
 function SearchResults() {
   const [rooms,setRooms] = useState([]); 
-   const history = useHistory();
-  
+ 
+   const history = useHistory();  
   const data = useContext(dataContext);
+  const startDate= `${data.startDate.toString()}-${data.month.toString()}-${data.year.toString()}`;
+    const endDate= `${data.endDate.toString()}-${data.month.toString()}-${data.year.toString()}`;
+    const days = data.days;
+    
+  
   const getRoomInfo = async () => {
     try {
      let RoomsData = await axios.get(`${env.api}/list-all-rooms`,{
@@ -38,21 +43,23 @@ function SearchResults() {
       }
     });
     setRooms([...RoomsData.data])
-    console.log([...rooms])
+   
+   
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleId = async (id) => {
+  const handleId = async (id,startDate,endDate,days) => {
     try {
       history.push("/roomsbooked");
-      let roombook = await axios.get(`${env.api}/booked-rooms/${id}`,{
+      let roombook = await axios.get(`${env.api}/booked-rooms/${id}/${startDate}/${endDate}/${days}`,{
         headers : {
           "Authorization" : window.localStorage.getItem("app_token")
         }
       })
-      console.log(id)
+      
+      
     } catch (error) {
       console.log(error)
     }
@@ -72,6 +79,7 @@ function SearchResults() {
   // }
 
   useEffect(() => {
+    
     getRoomInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -110,10 +118,12 @@ function SearchResults() {
                 { e.isbooked ? <h4>This room already booked</h4> :
                 <h4>
                   Total Price : {( totalPrice = data.days * e.price)} for{" "}
-                  {data.days} days
-                </h4>}
+                  {data.days} days  
+                </h4>
+                 
+                }
                 <Link to="/roomsbooked">
-                <Button variant='outlined' disabled={e.isbooked} onClick={() => handleId(e._id)} >Book</Button>
+                <Button variant='outlined' disabled={e.isbooked} onClick={() => handleId(e._id,startDate,endDate,days)} >Book</Button>
                 </Link>
               </div>
             </div>

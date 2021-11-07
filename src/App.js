@@ -14,6 +14,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Register from './Register'
 import BookedRooms from './BookedRooms';
+import EditBooking from './EditBooking';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Header />
         <Switch>
         <Route path='/' component={Home} exact={true}/>
+        <Route path='/editbooking' component={EditBooking} exact={true}/>
         <Route path="/roomsbooked" component={BookedRooms} exact={true}/>
         <Route path='/host' component={RoomUpload} exact={true}/>
         <Route path='/search' component={SearchPage} exact={true}/>

@@ -6,18 +6,18 @@ import env from "./settings";
 import dataContext from './ContextData'
 
 function Login() {
-    const [username, setusername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setpassword] = useState("");
     const data = useContext(dataContext)
     let history = useHistory();
     let handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            let logindata = await axios.post(`${env.api}/login`, { username, password })
+            let logindata = await axios.post(`${env.api}/login`, { email, password })
             console.log(logindata)
-            window.localStorage.setItem("user",username);
+            window.localStorage.setItem("user",email);
             window.localStorage.setItem("app_token",logindata.data.token);
-            data.setcurrentUser(username)
+            data.setcurrentUser(email)
             history.push("/")
         } catch (error) {
             console.log(error)
@@ -31,7 +31,7 @@ function Login() {
                 <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
                 <div class="form-floating">
-                    <input type="email" value={username} onChange={e => setusername(e.target.value)} class="form-control" id="floatingInput" placeholder="name@example.com" />
+                    <input type="email" value={email} onChange={e => setEmail(e.target.value)} class="form-control" id="floatingInput" placeholder="name@example.com" />
                     <label for="floatingInput">Email address</label>
                 </div>
                 <div class="form-floating">

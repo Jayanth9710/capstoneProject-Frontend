@@ -8,12 +8,14 @@ function Register() {
     const [username, setusername] = useState([]);
     const [password, setpassword] = useState([]);
     const [confirmpassword, setconfirmpassword] = useState([]);
+    const [email,setEmail] = useState([]);
     const history = useHistory()
     let handleSubmit = async (e) => {
         e.preventDefault()
-        console.log({ username, password, confirmpassword })
+        console.log({ username, password, confirmpassword,email })
         try {
-            await axios.post(`${env.api}/register`, { username, password });
+            await axios.post(`${env.api}/register`, { username, password,email });
+            
             history.push("/login")
         } catch (error) {
             console.log(error)
@@ -28,8 +30,12 @@ function Register() {
                 <h1 class="h3 mb-3 fw-normal">Please Register</h1>
 
                 <div class="form-floating">
-                    <input type="email" value={username} onChange={e => setusername(e.target.value)} class="form-control" id="floatingInput" placeholder="name@example.com" />
+                    <input type="email" value={email} onChange={e => setEmail(e.target.value)} class="form-control" id="floatingInput" placeholder="name@example.com" />
                     <label for="floatingInput">Email address</label>
+                </div>
+                <div class="form-floating">
+                    <input type="text" value={username} onChange={e => setusername(e.target.value)} class="form-control" id="floatingInput" placeholder="Jake peralta" />
+                    <label for="floatingInput">User Name</label>
                 </div>
                 <div class="form-floating">
                     <input type="password" value={password} onChange={e => setpassword(e.target.value)} class="form-control" id="floatingPassword" placeholder="Password" />

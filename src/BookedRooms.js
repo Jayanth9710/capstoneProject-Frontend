@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { React, useEffect, useState, useContext } from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import {Link} from 'react-router-dom';
 import StarIcon from "@mui/icons-material/Star";
 import env from "./settings";
 import dataContext from "./ContextData";
+import './bookedRooms.css'
 
 const ReadMore = ({ children }) => {
     const text = children;
@@ -24,6 +26,7 @@ const ReadMore = ({ children }) => {
 function BookedRooms() {
     const data = useContext(dataContext);
     const [rooms,setRooms] = useState([]); 
+    const [loadedContent,setLoadedContent] = useState(false);
 
 const getBookedRoom = async () => {
     try {
@@ -32,8 +35,15 @@ const getBookedRoom = async () => {
             "Authorization" : window.localStorage.getItem("app_token")
           }
         })
-        console.log(roomBook.data)
+        
         setRooms([...roomBook.data])
+        if(rooms.length===0) {
+          setLoadedContent(true);
+        }
+        else {
+          setLoadedContent(false)
+        }
+        
     } catch (error) {
         
     }
@@ -46,7 +56,7 @@ const getBookedRoom = async () => {
       let totalPrice;
     return (
         <>
-        <div>
+        {loadedContent ?<div>
             {rooms.map((e, index) => (
         <div key={e._id} className="searchResults">
           
@@ -79,13 +89,26 @@ const getBookedRoom = async () => {
                   {data.days} days
                 </h4>
               </div>
+              <div className='searchResults_edit'>
+                <Link to="/editbooking">
+                <button>Edit</button>
+                </Link>
+                <button>Cancel</button>
+              </div>
             </div>
           </div>
 
           <FavoriteBorderIcon className="searchResults_heart" />
         </div>
         ))}
-        </div>
+        </div> :<div className='noBookings'>
+          <div className='jumbotron'>
+          <h2>You have no current bookings!!</h2>
+          <Link to="/search">
+          <button className='btn btn-primary btn-lg'>Search for rooms!</button></Link>
+          </div>
+          </div>}
+        
         </>
     )
 }
