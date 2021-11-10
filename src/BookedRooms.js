@@ -37,11 +37,13 @@ const getBookedRoom = async () => {
         })
         
         setRooms([...roomBook.data])
-        if(rooms.length===0) {
+        if(rooms.length>=0) {
           setLoadedContent(true);
+          console.log(loadedContent)
         }
         else {
           setLoadedContent(false)
+          console.log(loadedContent)
         }
         
     } catch (error) {
@@ -85,8 +87,8 @@ const getBookedRoom = async () => {
               <div className="searchResults_price">
                 <h3>{e.price}/night</h3>
                 <h4>
-                  Total Price : {( totalPrice = data.days * e.price)} for{" "}
-                  {data.days} days
+                  Total Price : {( totalPrice = e.days * e.price)} for{" "}
+                  {e.days} days
                 </h4>
               </div>
               <div className='searchResults_edit'>

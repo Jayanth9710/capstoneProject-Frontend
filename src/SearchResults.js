@@ -88,7 +88,7 @@ function SearchResults() {
 
   return (
     <>
-      {rooms.map((e, index) => (
+      {rooms.map((e, index) =>  (
         <div key={e._id} className="searchResults">
           
             <img
