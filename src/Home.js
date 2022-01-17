@@ -18,12 +18,16 @@ function Home() {
                 title="Pondicherry"
                 desc="Stay and experience the French Connection in India."/>
                </Link>
+               <Link to="/s/ooty">
                 <Card src="http://www.ootyindia.com/pictures/package/packagethumb/home_ooty-coonoor-tour-13.jpeg"
                 title="Ooty"
                 desc="Get close to nature this vacation."/>
+                </Link>
+                <Link to ="/s/chennai">
                 <Card src="https://www.outlookindia.com/outlooktraveller//public/uploads/filemanager/images/Chennai-Central,-formerly-Madras-Central,-is-the-main-railway-terminus-in-the-city-of-Chennai,-India.-It-is-one-of-the-most-important-hubs-in-the-South..jpg"
                 title="Chennai"
                 desc="Business or pleasure trip we got you covered for a comfortable stay."/>
+                </Link>
             </div>
             <div className='home_section'>
                 <Card src="https://a0.muscache.com/im/pictures/eb9c7c6a-ee33-414a-b1ba-14e8860d59b3.jpg?im_w=720"

@@ -36,11 +36,18 @@ function RoomUpload() {
             Authorization: window.localStorage.getItem("app_token"),
           },
         }
+
       );
       setRoom("");
       history.push("/");
     } catch (error) {
       console.log(error);
+      if(error.message === "Request failed with status code 500") {
+        history.push("/login")
+      }
+      else {
+        window.alert("Check your network connection")
+      }
     }
   };
 
@@ -88,7 +95,7 @@ function RoomUpload() {
           <option value="5">5</option>
         </select>
         <div className="form-group">
-          <label>Google Drive Link of your Property Pics</label>
+          <label>Image Link</label>
           <input
             type="text"
             value={link}

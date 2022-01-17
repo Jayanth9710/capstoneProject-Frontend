@@ -57,8 +57,9 @@ function Searchcomp() {
     return (
         <div className='search'>
             <DateRangePicker ranges={[selectionRange]} onChange={handleSelection} minDate={new Date()} />
-            <h2>Number of Guests<PeopleIcon/></h2>
+            
             <div className='search_guests'>
+            <h2>Number of Guests<PeopleIcon/></h2>
                 <h4>Adults
             <span className='search_desc'>
               <button onClick={()=>DecreaseAd()} disabled={data.adults<1} className='search-btn'>-</button>{data.adults} <button onClick={()=>IncreaseAd()} className='search-btn'>+</button>  Ages 13 or above
@@ -69,11 +70,11 @@ function Searchcomp() {
                  <button onClick={()=>DecreaseKd()} disabled={data.kids<1} className='search-btn'>-</button>{data.kids} <button onClick={()=>IncreaseKd()} className='search-btn'>+</button>  Ages 2-12
             </span>
             </h4>
-                
+            <Button onClick={()=> history.push('/search')}>Search Airbnb</Button>
             </div>
                 
             
-            <Button onClick={()=> history.push('/search')}>Search Airbnb</Button>
+            
             
             
         </div>

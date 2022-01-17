@@ -12,11 +12,14 @@ export const DataProvider = ({ children }) => {
     const[month,setMonth]=useState([]);
     const[year,setYear]= useState([]);
     const[loc,setLoc] = useState('');
+    const[chennaiRooms,setChennaiRooms] = useState([]);
+    const[ootyRooms,setOotyRooms] = useState([]);
+    const[pondyRooms,setPondyRooms] = useState([]);
     const [currentUser,setcurrentUser] = useState(window.localStorage.getItem("user"));
   
     return (
       <DataContext.Provider
-        value={{ days, setDays, adults, setAdults,kids,setKids,startDate,setStartDate,endDate,setEndDate,month,setMonth,year,setYear,loc,setLoc,currentUser,setcurrentUser }}
+        value={{ days, setDays, adults, setAdults,kids,setKids,startDate,setStartDate,endDate,setEndDate,month,setMonth,year,setYear,loc,setLoc,currentUser,setcurrentUser,chennaiRooms,setChennaiRooms,ootyRooms,setOotyRooms,pondyRooms,setPondyRooms }}
       >
         {children}
       </DataContext.Provider>

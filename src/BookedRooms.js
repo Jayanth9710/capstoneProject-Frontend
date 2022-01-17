@@ -37,7 +37,8 @@ const getBookedRoom = async () => {
         })
         
         setRooms([...roomBook.data])
-        if(rooms.length>=0) {
+        console.log(rooms)
+        if(rooms.length>=1) {
           setLoadedContent(true);
           console.log(loadedContent)
         }
@@ -58,7 +59,7 @@ const getBookedRoom = async () => {
       let totalPrice;
     return (
         <>
-        {loadedContent ?<div>
+        {loadedContent ?(<div>
             {rooms.map((e, index) => (
         <div key={e._id} className="searchResults">
           
@@ -103,13 +104,13 @@ const getBookedRoom = async () => {
           <FavoriteBorderIcon className="searchResults_heart" />
         </div>
         ))}
-        </div> :<div className='noBookings'>
+        </div>) :(<div className='noBookings'>
           <div className='jumbotron'>
           <h2>You have no current bookings!!</h2>
           <Link to="/search">
           <button className='btn btn-primary btn-lg'>Search for rooms!</button></Link>
           </div>
-          </div>}
+          </div>)}
         
         </>
     )

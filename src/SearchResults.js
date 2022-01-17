@@ -65,6 +65,14 @@ function SearchResults() {
     }
   }
 
+  const handleClick = async(id) => {
+    try {
+      history.push(`/rooms/${id}`);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   // const handleSubmit = async (id) => {
   //      try {
   //        const rooms = await axios.get(`http://localhost:8800/api/roomsbkd/${id}`,{headers : {
@@ -89,7 +97,7 @@ function SearchResults() {
   return (
     <>
       {rooms.map((e, index) =>  (
-        <div key={e._id} className="searchResults">
+        <div key={e._id} className="searchResults" onClick={()=>handleClick(e._id)}>
           
             <img
               src={e.link}

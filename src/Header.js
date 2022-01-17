@@ -19,7 +19,7 @@ function Header() {
 
   const handleLogout = async (e) =>{
     myStorage.removeItem("user");
-    window.localStorage.removeItem("app_token");
+    myStorage.removeItem("app_token");
     data.setcurrentUser();
     history.push("/")
   }
@@ -31,7 +31,7 @@ function Header() {
             <img className='header_icon' src='logo.png' alt='logo'></img>
             </Link>
             
-            <FormControl margin='normal' >
+            {/* <FormControl margin='normal' >
   <InputLabel id="demo-simple-select-label">Select Location</InputLabel>
   <Select
     labelId="demo-simple-select-label"
@@ -45,7 +45,7 @@ function Header() {
     <MenuItem value="Kodaikanal" >Kodaikanal</MenuItem>
     <MenuItem  value="Ooty">Ooty</MenuItem>
   </Select>
-</FormControl>
+</FormControl> */}
                 {/* <SearchIcon/> */}
             
             <div className='header_right'>
@@ -53,21 +53,23 @@ function Header() {
                 <p>Become a host</p>
                 </Link>
                 
-                {data.currentUser ? (<div>
-          <button className="button logout" onClick={handleLogout}>Log out</button>
-          <Link to="/roomsbooked">
-            <button className="button login" >Your Bookings</button>
-            </Link>
-          </div>
+                {myStorage.user ==='' ? (
+               <div className="buttons">
+               <Link to="/login">
+               <button className="button login" >Login</button>
+               </Link>
+               <Link to="/register">
+               <button className="button register" >Register</button>
+               </Link>
+             </div>
           ) : (
-          <div className="buttons">
-            <Link to="/login">
-            <button className="button login" >Login</button>
-            </Link>
-            <Link to="/register">
-            <button className="button register" >Register</button>
-            </Link>
-          </div>
+          
+           <div>
+           <button className="button logout" onClick={handleLogout}>Log out</button>
+           <Link to="/roomsbooked">
+             <button className="button login" >Your Bookings</button>
+             </Link>
+           </div>
         )}
 
         

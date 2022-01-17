@@ -76,3 +76,8 @@
     color: rgb(192,192,192);
     cursor: pointer;
   }
+
+  .room-dates{
+      width: 100px;
+      height: 80px;
+  }

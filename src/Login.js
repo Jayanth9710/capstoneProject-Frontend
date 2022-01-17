@@ -3,52 +3,76 @@ import React, { useState,useContext } from 'react'
 import { useHistory } from 'react-router-dom';
 import './Login.css';
 import env from "./settings";
+import * as Yup from 'yup';
+import Textfield from './Textfield';
+import {Formik,Form} from 'formik';
 import dataContext from './ContextData'
 
-function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setpassword] = useState("");
+function Login() { 
+    const history = useHistory();
     const data = useContext(dataContext)
-    let history = useHistory();
-    let handleSubmit = async (e) => {
-        e.preventDefault()
+    const validate = Yup.object({
+        email : Yup.string().email("Must be a valid e-mail ID.").required("Email is required"),
+        password : Yup.string()
+        .required("Password is Required to Sign-in")
+    });
+
+    
+    const [loading,setLoading] = useState(false);
+    const [failure, setFailure] = useState(false);
+
+    const postData = async (values) => {
+        setLoading(true)
         try {
-            let logindata = await axios.post(`${env.api}/login`, { email, password })
-            console.log(logindata)
-            window.localStorage.setItem("user",email);
-            window.localStorage.setItem("app_token",logindata.data.token);
-            data.setcurrentUser(email)
-            history.push("/")
+            let userData = await axios.post(`${env.api}/login`,values);
+            window.localStorage.setItem("app_token",userData.data.token);
+            window.localStorage.setItem("user",userData.data.user);
+            // data.setcurrentUser(userData.data.user)
+            setLoading(false)
+            setFailure(false);
+            window.alert("Successful Sign-in!")
+            history.push("/") 
         } catch (error) {
             console.log(error)
+            setLoading(false)
+            setFailure(true);
+            if(error.message === "Request failed with status code 500") {
+                window.alert("Username or Password is Incorrect");
+            } else {
+                window.alert("Check your connection");
+            }
         }
     }
     return (
-        
-           <main class="form-signin text-center">
-            <form onSubmit={handleSubmit}>
-                <img class="mb-4" src="https://getbootstrap.com/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57" />
-                <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+          <>
+          {loading ? <h2>Loading....</h2> : (
+            <div className='signin__container'>
+                <Formik initialValues={{
+                    email: "",
+                    password: "",
+                }}
+                validationSchema={validate}
+                onSubmit={async (values) => {
+                    setLoading(true)
+                    postData(values);
+                }}>
+                    {(formik) => (
+                        <div className='signin__innerContainer'>
+                            <div className='signin__title'>
+                                <Form>
+                                    <Textfield label="Email" name="email" type="email" placeholder="Enter your email address"/>
+                                    <Textfield label="Password" name="password" type="password" placeholder="Enter your Password"/>
 
-                <div class="form-floating">
-                    <input type="email" value={email} onChange={e => setEmail(e.target.value)} class="form-control" id="floatingInput" placeholder="name@example.com" />
-                    <label for="floatingInput">Email address</label>
-                </div>
-                <div class="form-floating">
-                    <input type="password" value={password} onChange={e => setpassword(e.target.value)} class="form-control" id="floatingPassword" placeholder="Password" />
-                    <label for="floatingPassword">Password</label>
-                </div>
-
-                <div class="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" value="remember-me" /> Remember me
-                    </label>
-                </div>
-                <input class="w-100 btn btn-lg btn-primary" type="submit" value="Sign in" />
-                <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
-            </form>
-        </main>
-        
+                                    <button className='signin__buttons' type='submit'>LOGIN</button>
+                                </Form>
+                                {failure && <span className="failure">Something went wrong!</span>}
+                            </div>
+                        </div>
+                    )}
+                </Formik>
+            </div>
+        )}
+          </>   
     )
 }
 
