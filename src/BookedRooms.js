@@ -38,7 +38,7 @@ const getBookedRoom = async () => {
         
         setRooms([...roomBook.data])
         console.log(rooms)
-        if(rooms.length>=1) {
+        if(rooms.length >= 1) {
           setLoadedContent(true);
           console.log(loadedContent)
         }
@@ -50,6 +50,21 @@ const getBookedRoom = async () => {
     } catch (error) {
         
     }
+}
+
+const handleDelete = async (id) => {
+  try {
+    
+  await axios.delete(`${env.api}/delete-room/${id}`,{
+    headers : {
+      "Authorization" : window.localStorage.getItem("app_token")
+    }
+  });
+  getBookedRoom();
+  } catch (error) {
+    alert(error);
+
+  }
 }
 
     useEffect(() => {
@@ -92,11 +107,8 @@ const getBookedRoom = async () => {
                   {e.days} days
                 </h4>
               </div>
-              <div className='searchResults_edit'>
-                <Link to="/editbooking">
-                <button>Edit</button>
-                </Link>
-                <button>Cancel</button>
+              <div className='searchResults_edit'> 
+                <button className='cancel_btn' onClick={() => handleDelete(e._id)}>Cancel</button>
               </div>
             </div>
           </div>

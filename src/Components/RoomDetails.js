@@ -1,5 +1,5 @@
 import { React, useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import dataContext from "../ContextData";
 import {DateRangePicker} from 'react-date-range'
 import { getMonth, getYear } from 'date-fns';
@@ -8,25 +8,25 @@ import env from "../settings";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css"
 
-// const ReadMore = ({ children }) => {
-//     const text = children;
-//     const [isReadMore, setIsReadMore] = useState(true);
-//     const toggleReadMore = () => {
-//       setIsReadMore(!isReadMore);
-//     };
-//     return (
-//       <p className="text">
-//         {isReadMore ? text.slice(0, 150) : text}
-//         <span onClick={toggleReadMore} className="read-or-hide">
-//           {isReadMore ? "...read more" : " show less"}
-//         </span>
-//       </p>
-//     );
-//   };
+const ReadMore = ({ children }) => {
+    const text = children;
+    const [isReadMore, setIsReadMore] = useState(true);
+    const toggleReadMore = () => {
+      setIsReadMore(!isReadMore);
+    };
+    return (
+      <p className="text">
+        {isReadMore ? text.slice(0, 150) : text}
+        <span onClick={toggleReadMore} className="read-or-hide">
+          {isReadMore ? "...read more" : " show less"}
+        </span>
+      </p>
+    );
+  };
 
 function RoomDetails() {
   const { id } = useParams();
-
+  const history = useHistory();
   const data = useContext(dataContext);
     const [startDate,setStartDate] = useState(new Date());
     const [endDate,setEndDate] = useState(new Date());
@@ -54,6 +54,24 @@ function RoomDetails() {
    data.setStartDate(d1);
    data.setEndDate(d2)
    
+}
+
+
+
+const handleId = async (id,StartDate,EndDate,days) => {
+  try {
+    displayRazorPay()
+    history.push("/roomsbooked");
+    let roombook = await axios.get(`${env.api}/booked-rooms/${id}/${StartDate}/${EndDate}/${days}`,{
+      headers : {
+        "Authorization" : window.localStorage.getItem("app_token")
+      }
+    })
+    
+    
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 const getSingleRoomInfo = async(id) => {
@@ -143,7 +161,7 @@ async  function displayRazorPay () {
           <img src={e.link} alt="img" className="room-img" key={"img"} />
           <h3>{e.hotelname}</h3>
               <h3>{e.location}</h3>
-              {/* <ReadMore>{rooms.desc}</ReadMore> */}
+              <ReadMore>{e.desc}</ReadMore>
         </div>
       </div>
       <div className="roomPage__right">
@@ -152,7 +170,7 @@ async  function displayRazorPay () {
                     Total Price : {( totalPrice = data.days * e.price)} for{" "}
                     {data.days} days  
                   </h4>
-      <button onClick={displayRazorPay} className="confirmBook">Confirm Booking</button>
+      <button onClick={() => handleId(e._id,StartDate,EndDate,days)} className="confirmBook">Confirm Booking</button>
       </div>
     </div>
     ))}

@@ -53,23 +53,24 @@ function Header() {
                 <p>Become a host</p>
                 </Link>
                 
-                {myStorage.user ==='' ? (
-               <div className="buttons">
-               <Link to="/login">
-               <button className="button login" >Login</button>
-               </Link>
-               <Link to="/register">
-               <button className="button register" >Register</button>
-               </Link>
-             </div>
+                {myStorage.user  ? (
+                  <div>
+                  <button className="button logout" onClick={handleLogout}>Log out</button>
+                  <Link to="/roomsbooked">
+                    <button className="button login" >Your Bookings</button>
+                    </Link>
+                  </div>
+               
           ) : (
-          
-           <div>
-           <button className="button logout" onClick={handleLogout}>Log out</button>
-           <Link to="/roomsbooked">
-             <button className="button login" >Your Bookings</button>
-             </Link>
-           </div>
+            <div className="buttons">
+            <Link to="/login">
+            <button className="button login" >Login</button>
+            </Link>
+            <Link to="/register">
+            <button className="button register" >Register</button>
+            </Link>
+          </div>
+           
         )}
 
         
