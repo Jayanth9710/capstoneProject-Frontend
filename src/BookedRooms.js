@@ -38,7 +38,7 @@ const getBookedRoom = async () => {
         
         setRooms([...roomBook.data])
         console.log(rooms)
-        if(rooms.length >= 1) {
+        if(rooms.length >= 0) {
           setLoadedContent(true);
           console.log(loadedContent)
         }
