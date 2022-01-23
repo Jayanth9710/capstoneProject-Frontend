@@ -170,7 +170,7 @@ async  function displayRazorPay () {
                     Total Price : {( totalPrice = data.days * e.price)} for{" "}
                     {data.days} days  
                   </h4>
-      <button onClick={() => handleId(e._id,StartDate,EndDate,days)} className="confirmBook">Confirm Booking</button>
+      <button disabled={e.isbooked} onClick={() => handleId(e._id,StartDate,EndDate,days)} className="confirmBook">Confirm Booking</button>
       </div>
     </div>
     ))}
