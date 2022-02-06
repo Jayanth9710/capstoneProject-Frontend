@@ -10,10 +10,10 @@ function Banner(props) {
 
     return (
         <div className='banner'>
-            <div className='banner_search'>
+            {/* <div className='banner_search'>
                 {showDate && <Searchcomp/>}
                 <Button variant='outined' className='banner_search_button' onClick={()=>setShowDate(!showDate)}>{showDate ? "Hide": "Search dates"}</Button>
-            </div>
+            </div> */}
            
             <div className='banner_text'>
             

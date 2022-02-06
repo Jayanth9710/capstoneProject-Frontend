@@ -64,10 +64,10 @@ function Header() {
           ) : (
             <div className="buttons">
             <Link to="/login">
-            <button className="button login" >Login</button>
+            <button className="button_login" >Login</button>
             </Link>
             <Link to="/register">
-            <button className="button register" >Register</button>
+            <button className="button_register" >Register</button>
             </Link>
           </div>
            

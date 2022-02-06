@@ -34,6 +34,29 @@
 .logout{
     background-color: gray;
 }
+.button_login{
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    color: rgb(116, 106, 106);
+    cursor: pointer;
+}
+.button_register{
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    color: rgb(116, 106, 106);
+    cursor: pointer;
+}
+
+.button_login:hover {
+background-color: rgb(73, 165, 165);
+color: white;
+}
+.button_register:hover{
+background-color: tomato;
+color: white;
+}
 .logout:hover{
 background-color: red;
 }
