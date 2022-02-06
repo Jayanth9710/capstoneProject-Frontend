@@ -68,8 +68,8 @@ function Chennai(props) {
                   "Authorization" : window.localStorage.getItem("app_token")
                 }
               });
-                data.setChennaiRooms([...results.data])
-                
+              setRooms([...results.data])
+             
         } catch (error) {
             console.log(error)
         }
@@ -112,9 +112,9 @@ function Chennai(props) {
       let totalPrice;
     return (
         <>
-        {data.chennaiRooms.map((e, index) =>  (
+        {rooms.map((e, index) =>  (
          
-          <div key={e._id} className="searchResults"     >
+          <div key={e._id} onClick={()=>handleClick(e._id)} className="searchResults"     >
             
               <img
                 src={e.link}
@@ -140,7 +140,7 @@ function Chennai(props) {
                 </div>
                 <div className="searchResults_price">
                   <h3> &#8377; {e.price}/night</h3>
-                  <ChennaiRoom roomId={idData} />
+                  {/* <ChennaiRoom roomId={idData} /> */}
                   {/* { e.isbooked ? <h4>This room already booked</h4> :
                   <h4>
                     Total Price : {( totalPrice = data.days * e.price)} for{" "}
@@ -155,9 +155,9 @@ function Chennai(props) {
                   {/* <Link to="/roomsbooked">
                   <Button variant='outlined' disabled={e.isbooked} onClick={() => handleId(e._id,StartDate,EndDate,days)} >Book</Button>
                   </Link> */}
-                  <Link to="/chennaiRoom">
+                  {/* <Link to="/chennaiRoom">
                     <Button onClick={()=> handleClick(e._id)}>Show deets</Button>
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </div>

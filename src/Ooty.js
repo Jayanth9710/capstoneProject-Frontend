@@ -72,16 +72,24 @@ function Ooty() {
         }
     }
 
-    const handleId = async (id,StartDate,EndDate,days) => {
+    // const handleId = async (id,StartDate,EndDate,days) => {
+    //     try {
+    //       history.push("/roomsbooked");
+    //       let roombook = await axios.get(`${env.api}/booked-rooms/${id}/${StartDate}/${EndDate}/${days}`,{
+    //         headers : {
+    //           "Authorization" : window.localStorage.getItem("app_token")
+    //         }
+    //       })
+          
+          
+    //     } catch (error) {
+    //       console.log(error)
+    //     }
+    //   }
+
+      const handleClick = async(id) => {
         try {
-          history.push("/roomsbooked");
-          let roombook = await axios.get(`${env.api}/booked-rooms/${id}/${StartDate}/${EndDate}/${days}`,{
-            headers : {
-              "Authorization" : window.localStorage.getItem("app_token")
-            }
-          })
-          
-          
+          history.push(`/rooms/${id}`);
         } catch (error) {
           console.log(error)
         }
@@ -97,7 +105,7 @@ function Ooty() {
     return (
         <>
         {rooms.map((e, index) =>  (
-          <div key={e._id} className="searchResults">
+          <div key={e._id}  onClick={()=>handleClick(e._id)} className="searchResults">
             
               <img
                 src={e.link}
@@ -123,7 +131,7 @@ function Ooty() {
                 </div>
                 <div className="searchResults_price">
                   <h3>{e.price}/night</h3>
-                  { e.isbooked ? <h4>This room already booked</h4> :
+                  {/* { e.isbooked ? <h4>This room already booked</h4> :
                   <h4>
                     Total Price : {( totalPrice = data.days * e.price)} for{" "}
                     {data.days} days  
@@ -132,10 +140,8 @@ function Ooty() {
                   }
                   <div>
                   <DateRangePicker ranges={[selectionRange]} onChange={handleSelection} minDate={new Date()} />
-                  </div>
-                  <Link to="/roomsbooked">
-                  <Button variant='outlined' disabled={e.isbooked} onClick={() => handleId(e._id,StartDate,EndDate,days)} >Book</Button>
-                  </Link>
+                  </div> */}
+                  
                 </div>
               </div>
             </div>

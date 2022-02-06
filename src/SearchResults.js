@@ -50,20 +50,20 @@ function SearchResults() {
     }
   };
 
-  const handleId = async (id,startDate,endDate,days) => {
-    try {
-      history.push("/roomsbooked");
-      let roombook = await axios.get(`${env.api}/booked-rooms/${id}/${startDate}/${endDate}/${days}`,{
-        headers : {
-          "Authorization" : window.localStorage.getItem("app_token")
-        }
-      })
+  // const handleId = async (id,startDate,endDate,days) => {
+  //   try {
+  //     history.push("/roomsbooked");
+  //     let roombook = await axios.get(`${env.api}/booked-rooms/${id}/${startDate}/${endDate}/${days}`,{
+  //       headers : {
+  //         "Authorization" : window.localStorage.getItem("app_token")
+  //       }
+  //     })
       
       
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
   const handleClick = async(id) => {
     try {
@@ -130,9 +130,9 @@ function SearchResults() {
                 </h4>
                  
                 }
-                <Link to="/roomsbooked">
-                <Button variant='outlined' disabled={e.isbooked} onClick={() => handleId(e._id,startDate,endDate,days)} >Book</Button>
-                </Link>
+                
+                <Button variant='outlined' disabled={e.isbooked}  >Book</Button>
+              
               </div>
             </div>
           </div>

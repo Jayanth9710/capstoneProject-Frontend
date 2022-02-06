@@ -146,6 +146,7 @@ async  function displayRazorPay () {
             paymentObject.open();
         }
         let totalPrice;
+        const user = window.localStorage.getItem('user')
 
         // const toDo = async () => {
         //     displayRazorPay();
@@ -153,27 +154,32 @@ async  function displayRazorPay () {
         // }
   return (
     <>
-    {rooms.map((e,index)=>(
-    <div className="roomPage">
-      <div className="roomPage__left">
-        <div className="roomDetails">
-          <h2>Room Details</h2>
-          <img src={e.link} alt="img" className="room-img" key={"img"} />
-          <h3>{e.hotelname}</h3>
-              <h3>{e.location}</h3>
-              <ReadMore>{e.desc}</ReadMore>
+    {user === null ? <div className="guest_login" style={{color:'red',fontSize:'24px',fontWeight:'bold',marginTop:20}}>Please Login Before Checking Out !</div> : (
+      <>
+      {rooms.map((e,index)=>(
+        <div className="roomPage">
+          <div className="roomPage__left">
+            <div className="roomDetails">
+              <h2>Room Details</h2>
+              <img src={e.link} alt="img" className="room-img" key={"img"} />
+              <h3>{e.hotelname}</h3>
+                  <h3>{e.location}</h3>
+                  <ReadMore>{e.desc}</ReadMore>
+            </div>
+          </div>
+          <div className="roomPage__right">
+          <DateRangePicker ranges={[selectionRange]} onChange={handleSelection} minDate={new Date()} />
+          <h4>
+                        Total Price : {( totalPrice = data.days * e.price)} for{" "}
+                        {data.days} days  
+                      </h4>
+          <button disabled={e.isbooked} onClick={() => handleId(e._id,StartDate,EndDate,days)} className="confirmBook">Confirm Booking</button>
+          </div>
         </div>
-      </div>
-      <div className="roomPage__right">
-      <DateRangePicker ranges={[selectionRange]} onChange={handleSelection} minDate={new Date()} />
-      <h4>
-                    Total Price : {( totalPrice = data.days * e.price)} for{" "}
-                    {data.days} days  
-                  </h4>
-      <button disabled={e.isbooked} onClick={() => handleId(e._id,StartDate,EndDate,days)} className="confirmBook">Confirm Booking</button>
-      </div>
-    </div>
-    ))}
+        ))}
+        </>
+    )}
+    
     </>
   );
 }
