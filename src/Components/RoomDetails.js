@@ -115,12 +115,12 @@ async  function displayRazorPay () {
         return
     }
     
-    const data = await axios.post(`http://localhost:3004/rooms/${id}`,{totalPrice,id})
+    const data = await axios.post(`https://airbnb-clone-by-jay.herokuapp.com/rooms/${id}`,{totalPrice,id})
     
     console.log(data.data)
     
             const options = {
-                key:  'rzp_test_Pa1nNOyziSCFKL',  // Enter the Key ID generated from the Dashboard
+                key:  process.env.REACT_RAZOR_KEY,  // Enter the Key ID generated from the Dashboard
                 amount: totalPrice, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
                 currency: data.data.currency,
                 name: "Airbnb Room Payment",
