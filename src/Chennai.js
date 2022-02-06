@@ -92,7 +92,7 @@ function Chennai(props) {
 
     const handleClick = async (id) => {
       try {
-        history.push('/chennaiRoom');
+        history.push(`/rooms/${id}`);
         setIdData(id);
         
       } catch (error) {
