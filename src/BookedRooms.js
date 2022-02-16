@@ -29,6 +29,7 @@ function BookedRooms() {
     const [loadedContent,setLoadedContent] = useState(false);
 
 const getBookedRoom = async () => {
+  setLoadedContent(false)
     try {
         let roomBook = await axios.get(`${env.api}/roomsbooked`,{
           headers : {
@@ -38,7 +39,7 @@ const getBookedRoom = async () => {
         
         setRooms([...roomBook.data])
         console.log(rooms)
-        if(rooms.length >= 0) {
+        if((rooms.length) != 0) {
           setLoadedContent(true);
           console.log(loadedContent)
         }
@@ -48,7 +49,8 @@ const getBookedRoom = async () => {
         }
         
     } catch (error) {
-        
+      console.log(error)
+      setLoadedContent(false)
     }
 }
 
@@ -70,7 +72,7 @@ const handleDelete = async (id) => {
     useEffect(() => {
         getBookedRoom();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, []);
+      }, [rooms.length]);
       let totalPrice;
     return (
         <>

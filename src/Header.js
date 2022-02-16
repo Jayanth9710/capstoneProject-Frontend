@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './Header.css'
 import { FormControl, InputLabel, MenuItem, Select} from '@mui/material';
 import {useHistory} from 'react-router-dom';
@@ -23,7 +23,11 @@ function Header() {
     data.setcurrentUser();
     history.push("/")
   }
-  data.setLoc(location)
+  data.setLoc(location);
+
+  useEffect(()=>{
+
+  },[myStorage.getItem('user')])
     return (
       <>
         <div className='header'>
@@ -53,7 +57,7 @@ function Header() {
                 <p>Become a host</p>
                 </Link>
                 
-                {myStorage.user  ? (
+                {myStorage.getItem('user') ? (
                   <div>
                   <button className="button logout" onClick={handleLogout}>Log out</button>
                   <Link to="/roomsbooked">

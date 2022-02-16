@@ -27,7 +27,7 @@ function Login() {
             let userData = await axios.post(`${env.api}/login`,values);
             window.localStorage.setItem("app_token",userData.data.token);
             window.localStorage.setItem("user",userData.data.user);
-            // data.setcurrentUser(userData.data.user)
+            data.setcurrentUser( window.localStorage.getItem("user"))
             setLoading(false)
             setFailure(false);
             window.alert("Successful Sign-in!")
