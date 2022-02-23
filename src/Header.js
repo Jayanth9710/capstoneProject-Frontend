@@ -58,8 +58,8 @@ function Header() {
                 </Link>
                 
                 {myStorage.getItem('user') ? (
-                  <div>
-                  <button className="button logout" onClick={handleLogout}>Log out</button>
+                  <div className='buttons'>
+                  <button className="button_logout" onClick={handleLogout}>Log out</button>
                   <Link to="/roomsbooked">
                     <button className="button login" >Your Bookings</button>
                     </Link>

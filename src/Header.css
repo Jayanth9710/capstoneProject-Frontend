@@ -7,6 +7,7 @@
     background-color: white;
     z-index: 100;
     top: 0;
+    padding: 1%;
 }
 .header_icon{
     object-fit: contain;
@@ -18,8 +19,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 15vw;
-    margin-right: 60px;
+    width: 21vw;
+    margin-right: 140px;
 }
 #demo-simple-select{
     margin-top: 5px;
@@ -29,10 +30,15 @@
 }
 .host{
     text-decoration: none;
+    width: 312px;
     
 }
 .logout{
     background-color: gray;
+}
+
+.buttons{
+    width: 450px;
 }
 .button_login{
     border: none;
@@ -40,13 +46,25 @@
     border-radius: 5px;
     color: rgb(116, 106, 106);
     cursor: pointer;
+    margin-left: 3%;
 }
+
+.button_logout{
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    color: rgb(116, 106, 106);
+    cursor: pointer;
+    margin-right: 3%;
+}
+
 .button_register{
     border: none;
     padding: 5px;
     border-radius: 5px;
     color: rgb(116, 106, 106);
     cursor: pointer;
+    margin-left: 3%;
 }
 
 .button_login:hover {
